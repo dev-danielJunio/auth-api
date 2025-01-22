@@ -1,15 +1,12 @@
 package com.example.login_CRUD.controller;
 
 import com.example.login_CRUD.model.entities.User;
-import com.example.login_CRUD.model.repository.UserRepository;
+import com.example.login_CRUD.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -17,23 +14,39 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @PostMapping
     public ResponseEntity<User> postUser(@RequestBody User user){
-        User savedUser = userRepository.save(user);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        User createUser = userService.createUser(user);
+        return ResponseEntity.ok(createUser);
     }
 
     @GetMapping(value = "{id}")
-    public User findById(@PathVariable Long id){
-        return userRepository.findById(id).get();
+    public ResponseEntity<User> findById(@PathVariable Long id){
+        User user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping
-    public List<User> getAllUser(){
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> getAllUser(){
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
+    @PutMapping(value = "{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
+        User updateUser = userService.updateUser(id, user);
+        return ResponseEntity.ok(updateUser);
+    }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id){
+        if (userService.deleteById(id)) {
+            return ResponseEntity.ok("User deleted"); // 204 No Content
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
     }
 
 
