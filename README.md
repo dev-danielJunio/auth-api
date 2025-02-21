@@ -31,7 +31,7 @@ A API usa Spring Security para controle de autenticação. As seguintes funçõe
 
 ```
 USUÁRIO -> Função de usuário padrão para usuários logados.
-ADMIN -> Função administrativa para parceiros gestores (registo de novos parceiros).
+ADMIN -> Função administrativa para gerenciar produtos (registo de novos produtos).
 ```
 Para acessar endpoints protegidos como usuário ADMIN, forneça as credenciais de autenticação apropriadas no cabeçalho da solicitação.
 
