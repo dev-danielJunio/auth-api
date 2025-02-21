@@ -17,7 +17,7 @@ public class Product {
     private String nome;
 
     @Column(nullable = false)
-    private Double preco;
+        private Double preco;
 
     @Column(length = 255)
     private String descricao;

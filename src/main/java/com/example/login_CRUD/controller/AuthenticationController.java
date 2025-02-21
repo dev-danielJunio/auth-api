@@ -1,6 +1,8 @@
 package com.example.login_CRUD.controller;
 
+import com.example.login_CRUD.infra.security.TokenService;
 import com.example.login_CRUD.model.entities.AuthenticationDTO;
+import com.example.login_CRUD.model.entities.LoginResponseDTO;
 import com.example.login_CRUD.model.entities.RegisterDTO;
 import com.example.login_CRUD.model.entities.User;
 import com.example.login_CRUD.model.repository.UserRepository;
@@ -25,12 +27,17 @@ public class AuthenticationController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var userNamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(userNamePassword);
 
-        return ResponseEntity.ok().body(auth);
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
@@ -38,7 +45,7 @@ public class AuthenticationController {
         if(this.repository.findByEmail(data.login()) != null) return ResponseEntity.badRequest().build();
 
         String encrypedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encrypedPassword, data.Role());
+        User newUser = new User(data.login(), encrypedPassword, data.role());
 
         this.repository.save(newUser);
         return ResponseEntity.ok().body(newUser);
