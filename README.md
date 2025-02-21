@@ -18,13 +18,13 @@ https://github.com/dev-danielJunio/auth-api.git
 A API fornece os seguintes endpoints:
 
 ```markdown
-GET /product - Retrieve a list of all products. (all authenticated users)
+GET /product - Recuperar uma lista de todos os produtos. (todos os usuários autenticados).
 
-POST /product - Register a new product (ADMIN access required).
+POST /product - Register um novo produto (requerido acesso como ADMIN).
 
-POST /auth/login - Login into the App
+POST /auth/login - Logar no app.
 
-POST /auth/register - Register a new user into the App
+POST /auth/register - Register um novo usuario no app.
 ```
 
 # Autenticação
