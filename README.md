@@ -1,7 +1,6 @@
 ## API DE AUTENTICAÇÃO
 
-Esse projeto foi desenvolvido em Java afim de explorar e conhecer ferramentas atuais para autenticação de usuario, utilizando ferramentas ferramentas contemporaneas
-como JWT e Spring Security para controle autenticações e geração de token (matendo o padrão statless), Flyway migrations e PostgreSQL como banco de dados.
+Este projeto foi desenvolvido em Java com o objetivo de explorar e conhecer ferramentas modernas para autenticação de usuários. Foram utilizadas tecnologias contemporâneas, como JWT e Spring Security, para o controle de autenticação e geração de tokens, mantendo o padrão stateless. Além disso, foram empregadas Flyway Migrations para o versionamento do banco de dados e PostgreSQL como sistema de gerenciamento de banco de dados.
 
 ## Instalação
 1. Clone o repositório:
